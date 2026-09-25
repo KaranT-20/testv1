@@ -19,7 +19,7 @@ export default function ProfileSearch({ onFound }) {
     };
 
     return (
-        <div>
+        <div className="search-section">
             <h3>Find Profile</h3>
             <input
                 placeholder="Profile ID"
@@ -27,7 +27,7 @@ export default function ProfileSearch({ onFound }) {
                 onChange={(e) => setId(e.target.value)}
             />
             <button onClick={handleSearch}>Find</button>
-            {error && <p>{error}</p>}
+            {error && <p className="error-text">{error}</p>}
         </div>
     );
 }

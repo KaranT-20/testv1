@@ -4,6 +4,7 @@ import ProfileSearch from "./components/ProfileSearch";
 import ProfileDetails from "./components/ProfileDetails";
 import ProfileForm from "./components/ProfileForm";
 import ProfileCard from "./components/ProfileCard";
+import "../../App.css";
 
 export default function ProfilePage() {
     const [profiles, setProfiles] = useState([]);
@@ -25,7 +26,7 @@ export default function ProfilePage() {
     };
 
     return (
-        <div style={{ maxWidth: "800px", margin: "24px auto", padding: "0 16px", fontFamily: "sans-serif" }}>
+        <div className="page">
             <h2>Profile Management System</h2>
 
             <ProfileSearch onFound={setSelectedUser} />
@@ -43,10 +44,10 @@ export default function ProfilePage() {
                 onCancel={() => setEditingUser(null)}
             />
 
-            <hr style={{ margin: "24px 0" }} />
+            <hr />
 
             <h3>All Profiles (Click to View)</h3>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))", gap: "12px" }}>
+            <div className="card-grid">
                 {profiles.map((user) => (
                     <ProfileCard
                         key={user.id}

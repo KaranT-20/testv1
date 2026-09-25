@@ -37,16 +37,20 @@ export default function ProfileForm({ editData, onSuccess, onCancel }) {
     }
 
     return (
-        <form onSubmit={submitForm}>
+        <form className="profile-form" onSubmit={submitForm}>
             <h3>{editData ? "Edit Profile" : "New Profile"}</h3>
-            <input name="name" placeholder="Name" value={form.name} onChange={changeForm} required />
-            <input name="email" type="email" placeholder="Email" value={form.email} onChange={changeForm} required />
-            <input name="phone" placeholder="Phone" value={form.phone} onChange={changeForm} required />
-            <input name="address" placeholder="Address" value={form.address} onChange={changeForm} required />
-            <input name="age" type="number" placeholder="Age" value={form.age} onChange={changeForm} required />
-            <button type="submit">{editData ? "Update" : "Create"}</button>
-            {editData && <button type="button" onClick={onCancel}>Cancel</button>}
-            {error && <p>{error}</p>}
+            <div className="fields">
+                <input name="name" placeholder="Name" value={form.name} onChange={changeForm} required />
+                <input name="email" type="email" placeholder="Email" value={form.email} onChange={changeForm} required />
+                <input name="phone" placeholder="Phone" value={form.phone} onChange={changeForm} required />
+                <input name="address" placeholder="Address" value={form.address} onChange={changeForm} required />
+                <input name="age" type="number" placeholder="Age" value={form.age} onChange={changeForm} required />
+            </div>
+            <div className="form-actions">
+                <button type="submit">{editData ? "Update" : "Create"}</button>
+                {editData && <button type="button" onClick={onCancel}>Cancel</button>}
+            </div>
+            {error && <p className="error-text">{error}</p>}
         </form>
     );
 }
