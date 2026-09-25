@@ -13,7 +13,16 @@ import { errorHandler } from './src/middlewares/errorHandler.middlewares.js'
 const app = express()
 
 app.use(express.json())
-app.use(cors())
+app.use(
+  cors({
+    origin: [
+      "http://localhost:3000",
+      "https://*.vercel.app", // Allows preview & production Vercel URLs
+      "https://your-custom-domain.com",
+    ],
+    credentials: true,
+  })
+)
 
 app.get('/',(req,res)=>{
 res.status(200).send("server is running")
