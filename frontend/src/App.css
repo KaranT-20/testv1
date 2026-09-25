@@ -54,32 +54,14 @@
 }
 
 /* Form */
-.profile-form {
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  padding: 16px;
-  margin-bottom: 20px;
-  background: #fafafa;
-}
-
-.profile-form .fields {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-bottom: 12px;
-}
-
-.profile-form input {
-  width: 100%;
+form input {
+  display: block;
+  margin-bottom: 8px;
   padding: 7px 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 14px;
-}
-
-.profile-form .form-actions {
-  display: flex;
-  gap: 8px;
+  width: 260px;
 }
 
 .error-text {
