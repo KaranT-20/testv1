@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { getProfileById } from "../Services/ProfileApi.jsx";
 
-export default function ProfileSearch({ onFound }) {
+export default function ProfileSearch({ onResult }) {
     const [id, setId] = useState("");
     const [error, setError] = useState("");
 
@@ -11,10 +11,10 @@ export default function ProfileSearch({ onFound }) {
         try {
             setError("");
             const result = await getProfileById(id);
-            onFound(result.data.user?.[0] || null);
+            onResult(result.data.user?.[0] || null);
         } catch {
             setError("Profile not found");
-            onFound(null);
+            onResult(null);
         }
     };
 

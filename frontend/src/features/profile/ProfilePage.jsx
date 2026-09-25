@@ -11,25 +11,30 @@ export default function ProfilePage() {
     const [selectedUser, setSelectedUser] = useState(null);
     const [editingUser, setEditingUser] = useState(null);
 
+    const loadProfiles = async () => {
+        try {
+            const res = await getAllProfiles();
+            setProfiles(res.data.user || []);
+        } catch (err) {
+            console.error("Failed to load profiles:", err);
+        }
+    };
+
     useEffect(() => {
-        getAllProfiles()
-            .then((res) => setProfiles(res.data.user || []))
-            .catch((err) => console.error("Failed to load profiles:", err));
+        loadProfiles();
     }, []);
 
-    const handleSuccess = () => {
+    const handleSave = async () => {
         setSelectedUser(null);
         setEditingUser(null);
-        getAllProfiles()
-            .then((res) => setProfiles(res.data.user || []))
-            .catch((err) => console.error("Failed to load profiles:", err));
+        await loadProfiles();
     };
 
     return (
         <div className="page">
             <h2>Profile Management System</h2>
 
-            <ProfileSearch onFound={setSelectedUser} />
+            <ProfileSearch onResult={setSelectedUser} />
 
             <ProfileDetails
                 profile={selectedUser}
@@ -40,8 +45,8 @@ export default function ProfilePage() {
             <ProfileForm
                 key={editingUser?.id || "new"}
                 editData={editingUser}
-                onSuccess={handleSuccess}
-                onCancel={() => setEditingUser(null)}
+                onSave={handleSave}
+                onDismiss={() => setEditingUser(null)}
             />
 
             <hr />

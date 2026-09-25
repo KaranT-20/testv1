@@ -6,10 +6,10 @@ const emptyForm = {
     email: "",
     phone: "",
     address: "",
-    age: ""
+    age: "",
 };
 
-export default function ProfileForm({ editData, onSuccess, onCancel }) {
+export default function ProfileForm({ editData, onSave, onDismiss }) {
     const [form, setForm] = useState(editData || emptyForm);
     const [error, setError] = useState("");
 
@@ -21,16 +21,16 @@ export default function ProfileForm({ editData, onSuccess, onCancel }) {
         event.preventDefault();
 
         try {
-            const payload = { ...form, age: Number(form.age) };
+            const profileData = { ...form, age: Number(form.age) };
 
             if (editData) {
-                await updateProfile(editData.id, payload);
+                await updateProfile(editData.id, profileData);
             } else {
-                await createProfile(payload);
+                await createProfile(profileData);
             }
 
             setForm(emptyForm);
-            onSuccess();
+            onSave();
         } catch {
             setError("Could not save profile");
         }
@@ -48,7 +48,7 @@ export default function ProfileForm({ editData, onSuccess, onCancel }) {
             </div>
             <div className="form-actions">
                 <button type="submit">{editData ? "Update" : "Create"}</button>
-                {editData && <button type="button" onClick={onCancel}>Cancel</button>}
+                {editData && <button type="button" onClick={onDismiss}>Cancel</button>}
             </div>
             {error && <p className="error-text">{error}</p>}
         </form>
